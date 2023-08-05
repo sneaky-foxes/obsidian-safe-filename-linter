@@ -2,14 +2,16 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 
 interface FilenameLinterSettings {
 	squareBrackets: string;
-	caret: string;
 	numberSign: string;
+	caret: string;
+	pipe: string;
 }
 
 const DEFAULT_SETTINGS: FilenameLinterSettings = {
 	squareBrackets: 'off',
+	numberSign: 'off',
 	caret: 'off',
-	numberSign: 'off'
+	pipe: 'off'
 }
 
 export default class FilenameLinter extends Plugin {
@@ -107,6 +109,12 @@ export default class FilenameLinter extends Plugin {
 		if (this.settings.caret !== 'off') {
 				const replacement = this.getReplacementValueFromSetting(this.settings.caret);
 				newFilename = newFilename.replaceAll(/\^/ig, replacement);
+		}
+
+		// Handle pipe
+		if (this.settings.pipe !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.pipe);
+				newFilename = newFilename.replaceAll(/\|/ig, replacement);
 		}
 
 		// If there are changes to be made to the filename
@@ -209,5 +217,20 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				});
 			});
+
+		// Setting for pipe: |
+		new Setting(containerEl)
+			.setName('Replacement for pipe')
+			.setDesc('Specify the replacament for |')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.pipe);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.pipe = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
 	}
 }
