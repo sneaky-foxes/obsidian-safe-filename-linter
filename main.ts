@@ -181,7 +181,7 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 		containerEl.createDiv({ cls: 'css-class' }, (wrapper) => {
 			wrapper.createDiv({
 				cls: 'css-class',
-				text: 'Note that Obsidian will automatically truncate multiple spaces in filenames into one space.',
+				text: 'Note that Obsidian will automatically truncate multiple spaces in filenames and [[links]] into one space.',
 			});
 			wrapper.createDiv({ cls: 'css-class' }).appendChild(
 				createFragment((frag) => {
@@ -209,6 +209,7 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 
 		this.containerEl.createEl("h2", { text: "Obsidian troublesome characters" });
+		this.containerEl.createEl("p", { text: "Obsidian itself won't let you use these in titles, removing them automatically. If you create files via external means they can creep in. These characters wreak havoc with [[links]] syntax." });
 
 		// Setting for square brackets: []
 		new Setting(containerEl)
