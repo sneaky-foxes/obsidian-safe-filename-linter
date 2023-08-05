@@ -176,6 +176,8 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 	obsidianChars(): void {
 		const { containerEl } = this;
 
+		this.containerEl.createEl("h2", { text: "Obsidian troublesome characters" });
+
 		// Setting for square brackets: []
 		new Setting(containerEl)
 			.setName('Replacement for square brackets')
