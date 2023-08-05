@@ -162,7 +162,30 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 
 		containerEl.empty();
 
+		this.intro();
 		this.obsidianChars();
+	}
+
+	intro(): void {
+		const { containerEl } = this;
+
+		containerEl.createDiv({ cls: 'css-class' }, (wrapper) => {
+			wrapper.createDiv({
+				cls: 'css-class',
+				text: 'Note that Obsidian will automatically truncate multiple spaces in filenames into one space.',
+			});
+			wrapper.createDiv({ cls: 'css-class' }).appendChild(
+				createFragment((frag) => {
+					frag.appendText(
+						''
+					);
+					frag.createEl('a', {
+						text: '',
+						href: '',
+					});
+				})
+			);
+		});
 	}
 
 	addReplacementOptions(dropdown: DropdownComponent): void {
