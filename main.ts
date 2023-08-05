@@ -2,10 +2,12 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 
 interface FilenameLinterSettings {
 	squareBrackets: string;
+	numberSign: string;
 }
 
 const DEFAULT_SETTINGS: FilenameLinterSettings = {
-	squareBrackets: 'off'
+	squareBrackets: 'off',
+	numberSign: 'off'
 }
 
 export default class FilenameLinter extends Plugin {
@@ -93,6 +95,12 @@ export default class FilenameLinter extends Plugin {
 			newFilename = newFilename.replaceAll(/[\[\]]/ig, replacement);
 		}
 
+		// Handle number sign
+		if (this.settings.numberSign !== 'off') {
+		    const replacement = this.getReplacementValueFromSetting(this.settings.numberSign);
+			newFilename = newFilename.replaceAll(/#/ig, replacement);
+		}
+
 		// If there are changes to be made to the filename
 		if (newFilename != oldFilename) {
 
@@ -152,7 +160,7 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 	obsidianChars(): void {
 		const { containerEl } = this;
 
-		// []#^|
+		// Setting for square brackets: []
 		new Setting(containerEl)
 			.setName('Replacement for square brackets')
 			.setDesc('Specify the replacament for \[ and \]')
@@ -162,6 +170,20 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 				dropdown.setValue(this.plugin.settings.squareBrackets);
 				dropdown.onChange(async (value) => {
 					this.plugin.settings.squareBrackets = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		// Setting for number sign: #
+		new Setting(containerEl)
+			.setName('Replacement for number sign')
+			.setDesc('Specify the replacament for \#')
+			.addDropdown((dropdown) => {
+			    this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.numberSign);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.numberSign = value;
 					await this.plugin.saveSettings();
 				});
 			});
