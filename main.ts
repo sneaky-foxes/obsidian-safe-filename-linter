@@ -64,21 +64,32 @@ export default class FilenameLinter extends Plugin {
 		await this.saveData(this.settings);
 	}
 
+	getReplacementValueFromSetting(setting: Setting): string {
+		let replacement = '';
+		switch(setting) {
+			case 'blank':
+				replacement = '';
+				break;
+			case 'space':
+				replacement = ' ';
+				break;
+			case 'hyphen':
+				replacement = '-';
+				break;
+			case 'hyphen-space':
+				replacement = ' - ';
+				break;
+		}
+		return replacement;
+	}
+
 	async lintFilename(file: TFile) {
 		const oldFilename = file.basename;
 		let newFilename = file.basename;
 
 		// Handle square brackets
 		if (this.settings.squareBrackets !== 'off') {
-			let replacement = '';
-			switch(this.settings.squareBrackets) {
-				case 'blank':
-					replacement = '';
-					break;
-				case 'space':
-					replacement = ' ';
-					break;
-			}
+		    const replacement = this.getReplacementValueFromSetting(this.settings.squareBrackets);
 			newFilename = newFilename.replaceAll(/[\[\]]/ig, replacement);
 		}
 
