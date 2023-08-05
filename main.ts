@@ -6,6 +6,10 @@ interface FilenameLinterSettings {
 	caret: string;
 	pipe: string;
 	colon: string;
+	asterisk: string;
+	questionMark: string;
+	doubleQuote: string;
+	angleBrackets: string;
 }
 
 const DEFAULT_SETTINGS: FilenameLinterSettings = {
@@ -13,7 +17,11 @@ const DEFAULT_SETTINGS: FilenameLinterSettings = {
 	numberSign: 'off',
 	caret: 'off',
 	pipe: 'off',
-	colon: 'off'
+	colon: 'off',
+	asterisk: 'off',
+	questionMark: 'off',
+	doubleQuote: 'off',
+	angleBrackets: 'off'
 }
 
 export default class FilenameLinter extends Plugin {
@@ -125,6 +133,29 @@ export default class FilenameLinter extends Plugin {
 				newFilename = newFilename.replaceAll(/\:/ig, replacement);
 		}
 
+		// Handle asterisk
+		if (this.settings.asterisk !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.asterisk);
+				newFilename = newFilename.replaceAll(/\*/ig, replacement);
+		}
+
+		// Handle question mark
+		if (this.settings.questionMark !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.questionMark);
+				newFilename = newFilename.replaceAll(/\?/ig, replacement);
+		}
+
+		// Handle double quote
+		if (this.settings.doubleQuote !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.doubleQuote);
+				newFilename = newFilename.replaceAll(/\"/ig, replacement);
+		}
+
+		// Handle angle brackets
+		if (this.settings.angleBrackets !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.angleBrackets);
+				newFilename = newFilename.replaceAll(/[\<\>]/ig, replacement);
+		}
 
 		// If there are changes to be made to the filename
 		if (newFilename != oldFilename) {
@@ -173,6 +204,7 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 
 		this.intro();
 		this.obsidianChars();
+		this.androidChars();
 	}
 
 	intro(): void {
@@ -281,5 +313,68 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 				});
 			});
 
+	}
+
+	androidChars(): void {
+		const { containerEl } = this;
+
+		this.containerEl.createEl("h2", { text: "Android invalid characters" });
+		this.containerEl.createEl("p", { text: "Obsidian for Android will not allow you to create files with these characters, but external programs and other Obsidian platforms will. If you sync your repo between Android and non-Android systems using git or other means, these may cause you issues." });
+
+		// Setting for asterisk: *
+		new Setting(containerEl)
+			.setName('Replacement for asterisk')
+			.setDesc('Specify the replacament for *')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.asterisk);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.asterisk = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		// Setting for question mark: ?
+		new Setting(containerEl)
+			.setName('Replacement for question mark')
+			.setDesc('Specify the replacament for ?')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.questionMark);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.questionMark = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		// Setting for double quote: "
+		new Setting(containerEl)
+			.setName('Replacement for double quote')
+			.setDesc('Specify the replacament for "')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.doubleQuote);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.doubleQuote = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		// Setting for angle brackets: <>
+		new Setting(containerEl)
+			.setName('Replacement for angle brackets')
+			.setDesc('Specify the replacament for < and >')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.angleBrackets);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.angleBrackets = value;
+					await this.plugin.saveSettings();
+				});
+			});
 	}
 }
