@@ -80,23 +80,23 @@ export default class FilenameLinter extends Plugin {
 				await this.app.fileManager.renameFile(file, newFilepath);
 
 				// If the file was successfully rename, alert the user
-				new Notice(`"${oldFilename}" renamed to "${newFilename}"`);
+				new Notice(`"${oldFilename}" renamed to "${newFilename}"`, 0);
 			} catch(error) {
 				// If there was an error, alert the user.
-				new Notice(`Unable to rename "${oldFilename}" to "${newFilename}". There probably already exists a file with this name`);
+				new Notice(`Unable to rename "${oldFilename}" to "${newFilename}". There probably already exists a file with this name`, 0);
 			}
 		}
 	}
 
 	async lintAllFilenames() {
-		new Notice("Linting all filenames...");
+		new Notice("Linting all filenames...", 0);
 		await Promise.all(
 			// Get all files in the current vault
 			this.app.vault.getFiles().map(async (file) => {
 				await this.lintFilename(file);
 			})
 		);
-		new Notice("Linted all filenames");
+		new Notice("Linted all filenames", 0);
 	}
 }
 
