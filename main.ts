@@ -5,13 +5,15 @@ interface FilenameLinterSettings {
 	numberSign: string;
 	caret: string;
 	pipe: string;
+	colon: string;
 }
 
 const DEFAULT_SETTINGS: FilenameLinterSettings = {
 	squareBrackets: 'off',
 	numberSign: 'off',
 	caret: 'off',
-	pipe: 'off'
+	pipe: 'off',
+	colon: 'off'
 }
 
 export default class FilenameLinter extends Plugin {
@@ -32,7 +34,7 @@ export default class FilenameLinter extends Plugin {
 				// See https://docs.obsidian.md/Reference/TypeScript+API/Workspace/getActiveFile
 				if (activeFile !== null) {
 
-				    // If checking is true, we're simply "checking" if the command can be run.
+					// If checking is true, we're simply "checking" if the command can be run.
 					// If checking is false, then we want to actually perform the operation.
 					if (!checking) {
 						this.lintFilename(activeFile);
@@ -116,6 +118,13 @@ export default class FilenameLinter extends Plugin {
 				const replacement = this.getReplacementValueFromSetting(this.settings.pipe);
 				newFilename = newFilename.replaceAll(/\|/ig, replacement);
 		}
+
+		// Handle colon
+		if (this.settings.colon !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.colon);
+				newFilename = newFilename.replaceAll(/\:/ig, replacement);
+		}
+
 
 		// If there are changes to be made to the filename
 		if (newFilename != oldFilename) {
@@ -253,6 +262,20 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 				dropdown.setValue(this.plugin.settings.pipe);
 				dropdown.onChange(async (value) => {
 					this.plugin.settings.pipe = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		// Setting for colon: :
+		new Setting(containerEl)
+			.setName('Replacement for colon')
+			.setDesc('Specify the replacament for :')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.colon);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.colon = value;
 					await this.plugin.saveSettings();
 				});
 			});
