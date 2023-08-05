@@ -1,4 +1,4 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, normalizePath } from 'obsidian';
 
 interface FilenameLinterSettings {
 	mySetting: string;
@@ -65,7 +65,27 @@ export default class FilenameLinter extends Plugin {
 	}
 
 	async lintFilename(file: TFile) {
-		new Notice(`hello: ${file.basename}`);
+		const oldFilename = file.basename;
+		const newFilename = file.basename.replaceAll(/bad/ig, '');
+
+		// If there are changes to be made to the filename
+		if (newFilename != oldFilename) {
+
+			// Construct the new path
+			const newFilepath = normalizePath(`${file.parent.path}/${newFilename}.${file.extension}`);
+
+			// If a file already exists with this path, filemanager.renameFile() will throw an error. There might be other reasons it throws errors, but not as far as we can tell from the documentation.
+			// See https://docs.obsidian.md/Reference/TypeScript+API/FileManager/renameFile
+			try {
+				await this.app.fileManager.renameFile(file, newFilepath);
+
+				// If the file was successfully rename, alert the user
+				new Notice(`"${oldFilename}" renamed to "${newFilename}".`);
+			} catch(error) {
+				// If there was an error, alert the user.
+				new Notice(`Unable to rename "${oldFilename}" to "${newFilename}". There probably already exists a file with this name.`);
+			}
+		}
 	}
 
 	async lintAllFilenames() {
