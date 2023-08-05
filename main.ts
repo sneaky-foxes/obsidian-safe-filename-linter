@@ -2,11 +2,13 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 
 interface FilenameLinterSettings {
 	squareBrackets: string;
+	caret: string;
 	numberSign: string;
 }
 
 const DEFAULT_SETTINGS: FilenameLinterSettings = {
 	squareBrackets: 'off',
+	caret: 'off',
 	numberSign: 'off'
 }
 
@@ -91,14 +93,20 @@ export default class FilenameLinter extends Plugin {
 
 		// Handle square brackets
 		if (this.settings.squareBrackets !== 'off') {
-		    const replacement = this.getReplacementValueFromSetting(this.settings.squareBrackets);
-			newFilename = newFilename.replaceAll(/[\[\]]/ig, replacement);
+				const replacement = this.getReplacementValueFromSetting(this.settings.squareBrackets);
+				newFilename = newFilename.replaceAll(/[\[\]]/ig, replacement);
 		}
 
 		// Handle number sign
 		if (this.settings.numberSign !== 'off') {
-		    const replacement = this.getReplacementValueFromSetting(this.settings.numberSign);
-			newFilename = newFilename.replaceAll(/#/ig, replacement);
+				const replacement = this.getReplacementValueFromSetting(this.settings.numberSign);
+				newFilename = newFilename.replaceAll(/#/ig, replacement);
+		}
+
+		// Handle caret
+		if (this.settings.caret !== 'off') {
+				const replacement = this.getReplacementValueFromSetting(this.settings.caret);
+				newFilename = newFilename.replaceAll(/\^/ig, replacement);
 		}
 
 		// If there are changes to be made to the filename
@@ -165,7 +173,7 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 			.setName('Replacement for square brackets')
 			.setDesc('Specify the replacament for \[ and \]')
 			.addDropdown((dropdown) => {
-			    this.addReplacementOptions(dropdown);
+					this.addReplacementOptions(dropdown);
 
 				dropdown.setValue(this.plugin.settings.squareBrackets);
 				dropdown.onChange(async (value) => {
@@ -179,11 +187,25 @@ class FilenameLinterSettingTab extends PluginSettingTab {
 			.setName('Replacement for number sign')
 			.setDesc('Specify the replacament for \#')
 			.addDropdown((dropdown) => {
-			    this.addReplacementOptions(dropdown);
+					this.addReplacementOptions(dropdown);
 
 				dropdown.setValue(this.plugin.settings.numberSign);
 				dropdown.onChange(async (value) => {
 					this.plugin.settings.numberSign = value;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		// Setting for caret: ^
+		new Setting(containerEl)
+			.setName('Replacement for caret')
+			.setDesc('Specify the replacament for ^')
+			.addDropdown((dropdown) => {
+					this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.caret);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.caret = value;
 					await this.plugin.saveSettings();
 				});
 			});
