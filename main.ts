@@ -1,11 +1,11 @@
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, normalizePath } from 'obsidian';
 
 interface FilenameLinterSettings {
-	mySetting: string;
+	squareBrackets: string;
 }
 
 const DEFAULT_SETTINGS: FilenameLinterSettings = {
-	mySetting: 'default'
+	squareBrackets: 'off'
 }
 
 export default class FilenameLinter extends Plugin {
@@ -49,7 +49,7 @@ export default class FilenameLinter extends Plugin {
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new FilenameLinterSettingTab(this.app, this));
 	}
 
 	onunload() {
@@ -66,7 +66,21 @@ export default class FilenameLinter extends Plugin {
 
 	async lintFilename(file: TFile) {
 		const oldFilename = file.basename;
-		const newFilename = file.basename.replaceAll(/bad/ig, '');
+		let newFilename = file.basename;
+
+		// Handle square brackets
+		if (this.settings.squareBrackets !== 'off') {
+			let replacement = '';
+			switch(this.settings.squareBrackets) {
+				case 'blank':
+					replacement = '';
+					break;
+				case 'space':
+					replacement = ' ';
+					break;
+			}
+			newFilename = newFilename.replaceAll(/[\[\]]/ig, replacement);
+		}
 
 		// If there are changes to be made to the filename
 		if (newFilename != oldFilename) {
@@ -100,7 +114,7 @@ export default class FilenameLinter extends Plugin {
 	}
 }
 
-class SampleSettingTab extends PluginSettingTab {
+class FilenameLinterSettingTab extends PluginSettingTab {
 	plugin: FilenameLinter;
 
 	constructor(app: App, plugin: FilenameLinter) {
@@ -113,15 +127,32 @@ class SampleSettingTab extends PluginSettingTab {
 
 		containerEl.empty();
 
+		this.obsidianChars();
+	}
+
+	addReplacementOptions(dropdown: DropdownComponent): void {
+		dropdown.addOption('off', 'off');
+		dropdown.addOption('blank', 'empty string');
+		dropdown.addOption('space', 'space');
+		dropdown.addOption('hyphen', 'hyphen');
+		dropdown.addOption('hyphen-space', 'hyphen surrounded by spaces');
+	}
+
+	obsidianChars(): void {
+		const { containerEl } = this;
+
+		// []#^|
 		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
-				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
+			.setName('Replacement for square brackets')
+			.setDesc('Specify the replacament for \[ and \]')
+			.addDropdown((dropdown) => {
+			    this.addReplacementOptions(dropdown);
+
+				dropdown.setValue(this.plugin.settings.squareBrackets);
+				dropdown.onChange(async (value) => {
+					this.plugin.settings.squareBrackets = value;
 					await this.plugin.saveSettings();
-				}));
+				});
+			});
 	}
 }
