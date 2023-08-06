@@ -1,4 +1,4 @@
-import { App, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting } from 'obsidian';
 
 export default class FilenameLinterSettingTab extends PluginSettingTab {
 	plugin: FilenameLinter;
@@ -41,7 +41,7 @@ export default class FilenameLinterSettingTab extends PluginSettingTab {
 		// Setting for square brackets: []
 		new Setting(containerEl)
 			.setName('Replacement for square brackets')
-			.setDesc('Specify the replacament for \[ and \]')
+			.setDesc('Specify the replacament for [ and ]')
 			.addDropdown((dropdown) => {
 					this.addReplacementOptions(dropdown);
 
@@ -55,7 +55,7 @@ export default class FilenameLinterSettingTab extends PluginSettingTab {
 		// Setting for number sign: #
 		new Setting(containerEl)
 			.setName('Replacement for number sign')
-			.setDesc('Specify the replacament for \#')
+			.setDesc('Specify the replacament for #')
 			.addDropdown((dropdown) => {
 					this.addReplacementOptions(dropdown);
 
