@@ -1,34 +1,75 @@
-# Obsidian Sample Plugin
+# Obsidian Filename Linter Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+## Using the Plugin
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+### Manual Invocation
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+This plugin adds two commands.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+`Filename linter: Lint the current filename`
+`Filename linter: Lint all filesnames in the vault`
 
-## First time developing plugins?
+The renames are regular Obsidian renaming calls and will follow your vault settings for updating internal links (Prompted or Automatic).
+Be prepared to be patient if you have a large vault with many required renames.
 
-Quick starting guide for new plugin devs:
+### Automatic Linting
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+Not yet available.
 
-## Releasing new releases
+### Credits
+
+We are grateful to the developers of Obsidian for the [Obisidan Sample Plugin](obsidianmd/obsidian-sample-plugin) for the basis of this plugin, and to [Obsidian Filename Emoji Remover Plugin](https://github.com/YTolun/obsidian-filename-emoji-remover), whose code we read and experimented with before diving into writing our own plugin.
+
+## Installing the Plugin
+
+### Manul Install
+
+1. On the command line, navigate to your vault's `.obsidian/plugins` directory and run:
+   `git clone https://github.com/rocketnova/obsidian-filename-linter`
+2. In your Obsidian vault, enable this project from the Community Plugins setting section
+3. Set up your preferred character replacements in the Filename Linter Community Plugins section
+
+### Community Plugin Directory
+
+Not yet available.
+
+## Developing the Plugin
+
+### Initial Setup
+
+1. Install [nvm](https://github.com/nvm-sh/nvm)
+2. Create a sandbox Obsidian vault
+3. In the sandbox Obsidian vault, enable Community Plugins. This should create a `plugins` dir
+4. In the `plugins` dir, install the [Hot Reload plugin](https://github.com/pjeby/hot-reload) (optional; strongly suggested)
+5. In the `plugins` dir, git clone the project
+6. In the cloned project dir, install node v18.x
+7. In the cloned project dir, install the dependencies: `npm install`
+8. In the cloned project dir, start dev mode: `npm run dev`
+9. In the sandbox Obsidian vault, enable this project and the Hot Reload plugin
+
+### Developing
+
+When developing, ensure you are running `npm run dev` to keep the project building changes.
+
+### Testing
+
+No tests are currently setup.
+
+### Linting
+
+- To use eslint with this project, make sure to install eslint from terminal:
+  - `npm install -g eslint`
+- To use eslint to analyze this project use this command:
+  - `eslint main.ts`
+  - eslint will then create a report with suggestions for code improvement by file and line number.
+- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
+  - `eslint .\src\`
+
+### Obsidian API Updates
+
+For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+
+### Releasing new releases
 
 - Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
 - Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
@@ -39,58 +80,13 @@ Quick starting guide for new plugin devs:
 > You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
 > The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
 
-## Adding your plugin to the community plugin list
+### Adding your plugin to the community plugin list
 
 - Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
 - Publish an initial version.
 - Make sure you have a `README.md` file in the root of your repo.
 - Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
 
-## How to use
-
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
+### Obsidian API Documentation
 
 See https://github.com/obsidianmd/obsidian-api
