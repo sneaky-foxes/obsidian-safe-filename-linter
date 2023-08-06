@@ -1,9 +1,9 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
 
-export default class FilenameLinterSettingTab extends PluginSettingTab {
-	plugin: FilenameLinter;
+export default class SafeFilenameLinterSettingTab extends PluginSettingTab {
+	plugin: SafeFilenameLinter;
 
-	constructor(app: App, plugin: FilenameLinter) {
+	constructor(app: App, plugin: SafeFilenameLinter) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}

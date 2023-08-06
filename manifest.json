@@ -1,6 +1,6 @@
 {
-	"id": "obsidian-filename-linter",
-	"name": "Filename Linter",
+	"id": "safe-filename-linter",
+	"name": "Safe Filename Linter",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "Lints filenames for invalid or troublesome characters",
