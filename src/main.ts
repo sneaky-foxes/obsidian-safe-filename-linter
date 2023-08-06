@@ -1,4 +1,4 @@
-import { App, Notice, Plugin, Setting, normalizePath } from 'obsidian';
+import { Notice, Plugin, Setting, normalizePath } from 'obsidian';
 import FilenameLinterSettingTab from './settings';
 
 interface FilenameLinterSettings {
@@ -107,7 +107,7 @@ export default class FilenameLinter extends Plugin {
 		// Handle square brackets
 		if (this.settings.squareBrackets !== 'off') {
 				const replacement = this.getReplacementValueFromSetting(this.settings.squareBrackets);
-				newFilename = newFilename.replaceAll(/[\[\]]/ig, replacement);
+				newFilename = newFilename.replaceAll(/[[\]]/ig, replacement);
 		}
 
 		// Handle number sign
@@ -131,7 +131,7 @@ export default class FilenameLinter extends Plugin {
 		// Handle colon
 		if (this.settings.colon !== 'off') {
 				const replacement = this.getReplacementValueFromSetting(this.settings.colon);
-				newFilename = newFilename.replaceAll(/\:/ig, replacement);
+				newFilename = newFilename.replaceAll(/:/ig, replacement);
 		}
 
 		// Handle asterisk
@@ -149,13 +149,13 @@ export default class FilenameLinter extends Plugin {
 		// Handle double quote
 		if (this.settings.doubleQuote !== 'off') {
 				const replacement = this.getReplacementValueFromSetting(this.settings.doubleQuote);
-				newFilename = newFilename.replaceAll(/\"/ig, replacement);
+				newFilename = newFilename.replaceAll(/"/ig, replacement);
 		}
 
 		// Handle angle brackets
 		if (this.settings.angleBrackets !== 'off') {
 				const replacement = this.getReplacementValueFromSetting(this.settings.angleBrackets);
-				newFilename = newFilename.replaceAll(/[\<\>]/ig, replacement);
+				newFilename = newFilename.replaceAll(/[<>]/ig, replacement);
 		}
 
 		// If there are changes to be made to the filename
