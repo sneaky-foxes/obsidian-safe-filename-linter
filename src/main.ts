@@ -1,7 +1,7 @@
 import { Notice, Plugin, Setting, normalizePath } from 'obsidian';
-import FilenameLinterSettingTab from './settings';
+import SafeFilenameLinterSettingTab from './settings';
 
-interface FilenameLinterSettings {
+interface SafeFilenameLinterSettings {
 	squareBrackets: string;
 	numberSign: string;
 	caret: string;
@@ -13,7 +13,7 @@ interface FilenameLinterSettings {
 	angleBrackets: string;
 }
 
-const DEFAULT_SETTINGS: FilenameLinterSettings = {
+const DEFAULT_SETTINGS: SafeFilenameLinterSettings = {
 	squareBrackets: 'off',
 	numberSign: 'off',
 	caret: 'off',
@@ -25,8 +25,8 @@ const DEFAULT_SETTINGS: FilenameLinterSettings = {
 	angleBrackets: 'off'
 }
 
-export default class FilenameLinter extends Plugin {
-	settings: FilenameLinterSettings;
+export default class SafeFilenameLinter extends Plugin {
+	settings: SafeFilenameLinterSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -66,7 +66,7 @@ export default class FilenameLinter extends Plugin {
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new FilenameLinterSettingTab(this.app, this));
+		this.addSettingTab(new SafeFilenameLinterSettingTab(this.app, this));
 	}
 
 	onunload() {
