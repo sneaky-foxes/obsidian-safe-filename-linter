@@ -6,8 +6,8 @@
 
 This plugin adds two commands.
 
-`Filename linter: Lint the current filename`
-`Filename linter: Lint all filesnames in the vault`
+- `Filename linter: Lint the current filename`
+- `Filename linter: Lint all filesnames in the vault`
 
 The renames are regular Obsidian renaming calls and will follow your vault settings for updating internal links (Prompted or Automatic).
 Be prepared to be patient if you have a large vault with many required renames.
@@ -22,7 +22,7 @@ We are grateful to the developers of Obsidian for the [Obisidan Sample Plugin](o
 
 ## Installing the Plugin
 
-### Manul Install
+### Manual Install
 
 1. On the command line, navigate to your vault's `.obsidian/plugins` directory and run:
    `git clone https://github.com/rocketnova/obsidian-filename-linter`
@@ -51,9 +51,17 @@ Not yet available.
 
 When developing, ensure you are running `npm run dev` to keep the project building changes.
 
+### Contributing
+
+We welcome issues and pull requests for any characters that cause issues for Obsidian or any platform it runs on. This plugin has no desire to handle linting characters beyond functional filename use cases.
+
+If submitting a PR, please lint your code changes. Please thoroughly test on at least one platform, and include instructions in the PR. Add a review request from @rocketnova or @lomky.
+
+NB: We intentially did not include `\` and `/` due to difficulties in testing these globally-forbidden filename characters, but would welcome a contribution with testing protocol for them.
+
 ### Testing
 
-No tests are currently setup.
+No automated tests are currently setup.
 
 ### Linting
 
@@ -82,10 +90,10 @@ For updates to the Obsidian API run `npm update` in the command line under your 
 
 ### Adding your plugin to the community plugin list
 
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+- [ ] Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
+- [ ] Publish an initial version.
+- [x] Make sure you have a `README.md` file in the root of your repo.
+- [ ] Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
 
 ### Obsidian API Documentation
 
