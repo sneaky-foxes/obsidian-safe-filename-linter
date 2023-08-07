@@ -25,7 +25,7 @@ We are grateful to the developers of Obsidian for the [Obisidan Sample Plugin](o
 ### Manual Install
 
 1. On the command line, navigate to your vault's `.obsidian/plugins` directory and run:
-   `git clone https://github.com/rocketnova/obsidian-filename-linter`
+   `git clone https://github.com/sneaky-foxes/obsidian-safe-filename-linter`
 2. In your Obsidian vault, enable this project from the Community Plugins setting section
 3. Set up your preferred character replacements in the Filename Linter Community Plugins section
 
