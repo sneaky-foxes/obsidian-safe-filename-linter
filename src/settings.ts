@@ -21,7 +21,9 @@ export default class SafeFilenameLinterSettingTab extends PluginSettingTab {
 	intro(): void {
 		const { containerEl } = this;
 
-		containerEl.createEl("p", { text: 'Note that Obsidian will automatically truncate multiple spaces in filenames and [[links]] into one space.' });
+		containerEl.createEl('p', {
+			text: 'Note that Obsidian will automatically truncate multiple spaces in filenames and [[links]] into one space.',
+		});
 	}
 
 	addReplacementOptions(dropdown: DropdownComponent): void {
@@ -35,8 +37,10 @@ export default class SafeFilenameLinterSettingTab extends PluginSettingTab {
 	obsidianChars(): void {
 		const { containerEl } = this;
 
-		containerEl.createEl("h2", { text: "Obsidian troublesome characters" });
-		containerEl.createEl("p", { text: "Obsidian itself won't let you use these in filenames and will remove them automatically. However, if you create files via external means they can creep in. These characters wreak havoc with [[links]] syntax." });
+		containerEl.createEl('h2', { text: 'Obsidian troublesome characters' });
+		containerEl.createEl('p', {
+			text: "Obsidian itself won't let you use these in filenames and will remove them automatically. However, if you create files via external means they can creep in. These characters wreak havoc with [[links]] syntax.",
+		});
 
 		// Setting for square brackets: []
 		new Setting(containerEl)
@@ -102,14 +106,15 @@ export default class SafeFilenameLinterSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				});
 			});
-
 	}
 
 	androidChars(): void {
 		const { containerEl } = this;
 
-		this.containerEl.createEl("h2", { text: "Android invalid characters" });
-		this.containerEl.createEl("p", { text: "Obsidian for Android will not allow you to create filenames with these characters, but external programs and other Obsidian platforms will. If you sync your vault between Android and non-Android systems using git or other means, these may cause you issues." });
+		this.containerEl.createEl('h2', { text: 'Android invalid characters' });
+		this.containerEl.createEl('p', {
+			text: 'Obsidian for Android will not allow you to create filenames with these characters, but external programs and other Obsidian platforms will. If you sync your vault between Android and non-Android systems using git or other means, these may cause you issues.',
+		});
 
 		// Setting for asterisk: *
 		new Setting(containerEl)
