@@ -106,56 +106,56 @@ export default class SafeFilenameLinter extends Plugin {
 
 		// Handle square brackets
 		if (this.settings.squareBrackets !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.squareBrackets);
-				newFilename = newFilename.replaceAll(/[[\]]/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.squareBrackets);
+			newFilename = newFilename.replaceAll(/[[\]]/ig, replacement);
 		}
 
 		// Handle number sign
 		if (this.settings.numberSign !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.numberSign);
-				newFilename = newFilename.replaceAll(/#/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.numberSign);
+			newFilename = newFilename.replaceAll(/#/ig, replacement);
 		}
 
 		// Handle caret
 		if (this.settings.caret !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.caret);
-				newFilename = newFilename.replaceAll(/\^/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.caret);
+			newFilename = newFilename.replaceAll(/\^/ig, replacement);
 		}
 
 		// Handle pipe
 		if (this.settings.pipe !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.pipe);
-				newFilename = newFilename.replaceAll(/\|/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.pipe);
+			newFilename = newFilename.replaceAll(/\|/ig, replacement);
 		}
 
 		// Handle colon
 		if (this.settings.colon !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.colon);
-				newFilename = newFilename.replaceAll(/:/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.colon);
+			newFilename = newFilename.replaceAll(/:/ig, replacement);
 		}
 
 		// Handle asterisk
 		if (this.settings.asterisk !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.asterisk);
-				newFilename = newFilename.replaceAll(/\*/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.asterisk);
+			newFilename = newFilename.replaceAll(/\*/ig, replacement);
 		}
 
 		// Handle question mark
 		if (this.settings.questionMark !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.questionMark);
-				newFilename = newFilename.replaceAll(/\?/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.questionMark);
+			newFilename = newFilename.replaceAll(/\?/ig, replacement);
 		}
 
 		// Handle double quote
 		if (this.settings.doubleQuote !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.doubleQuote);
-				newFilename = newFilename.replaceAll(/"/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.doubleQuote);
+			newFilename = newFilename.replaceAll(/"/ig, replacement);
 		}
 
 		// Handle angle brackets
 		if (this.settings.angleBrackets !== 'off') {
-				const replacement = this.getReplacementValueFromSetting(this.settings.angleBrackets);
-				newFilename = newFilename.replaceAll(/[<>]/ig, replacement);
+			const replacement = this.getReplacementValueFromSetting(this.settings.angleBrackets);
+			newFilename = newFilename.replaceAll(/[<>]/ig, replacement);
 		}
 
 		// If there are changes to be made to the filename
@@ -170,22 +170,22 @@ export default class SafeFilenameLinter extends Plugin {
 				await this.app.fileManager.renameFile(file, newFilepath);
 
 				// If the file was successfully rename, alert the user
-				new Notice(`"${oldFilename}" renamed to "${newFilename}"`, 0);
+				new Notice(`"${oldFilename}" renamed to "${newFilename}"`, 30);
 			} catch(error) {
 				// If there was an error, alert the user.
-				new Notice(`Unable to rename "${oldFilename}" to "${newFilename}". There probably already exists a file with this name`, 0);
+				new Notice(`Unable to rename "${oldFilename}" to "${newFilename}". There probably already exists a file with this name`, 30);
 			}
 		}
 	}
 
 	async lintAllFilenames() {
-		new Notice("Linting all filenames...", 0);
+		new Notice("Linting all filenames...", 30);
 		await Promise.all(
 			// Get all files in the current vault
 			this.app.vault.getFiles().map(async (file) => {
 				await this.lintFilename(file);
 			})
 		);
-		new Notice("Linted all filenames", 0);
+		new Notice("Linted all filenames", 30);
 	}
 }
