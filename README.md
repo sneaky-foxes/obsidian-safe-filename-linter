@@ -52,9 +52,9 @@ When developing, ensure you are running `npm run dev` to keep the project buildi
 
 ### Contributing
 
-We welcome issues and pull requests for any characters that cause issues for Obsidian, any platform it runs on, or any additional replacement characters. This plugin has no desire to handle linting characters beyond functional filename use cases.
+We welcome issues and pull requests for any characters that cause issues for Obsidian or any platform it runs on. We also welcome any additional replacement characters. This plugin has no desire to handle linting characters beyond functional filename use cases.
 
-If submitting a PR, please lint your code changes. Please thoroughly test on at least one platform, and include testing instructions in the PR. Add a review request from @sneaky-foxes.
+If submitting a PR, please run eslint and prettier on your code changes. Please thoroughly test on at least one platform, and include testing instructions in the PR. Add a review request from @sneaky-foxes.
 
 NB: We intentially did not include `\` and `/` due to difficulties in testing these globally-forbidden filename characters, but would welcome a contribution with testing protocol for them.
 
@@ -62,13 +62,16 @@ NB: We intentially did not include `\` and `/` due to difficulties in testing th
 
 No automated tests are currently setup.
 
-### Linting
+### Code Linting
 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
 - To use eslint to analyze this project use this command:
   - `eslint .src`
   - eslint will then create a report with suggestions for code improvement by file and line number.
+
+### Code Formatting
+
+- To use prettier to format source code use this command:
+  - `npx prettier src --write`
 
 ### Obsidian API updates
 
