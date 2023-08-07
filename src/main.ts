@@ -1,4 +1,4 @@
-import { Notice, Plugin, Setting, TFile, normalizePath } from 'obsidian';
+import { Notice, Plugin, TFile, normalizePath } from 'obsidian';
 import SafeFilenameLinterSettingTab from './settings';
 
 interface SafeFilenameLinterSettings {
