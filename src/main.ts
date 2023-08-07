@@ -1,4 +1,4 @@
-import { Notice, Plugin, Setting, normalizePath } from 'obsidian';
+import { Notice, Plugin, Setting, TFile, normalizePath } from 'obsidian';
 import SafeFilenameLinterSettingTab from './settings';
 
 interface SafeFilenameLinterSettings {
@@ -81,7 +81,7 @@ export default class SafeFilenameLinter extends Plugin {
 		await this.saveData(this.settings);
 	}
 
-	getReplacementValueFromSetting(setting: Setting): string {
+	getReplacementValueFromSetting(setting: string): string {
 		let replacement = '';
 		switch (setting) {
 			case 'blank':
@@ -179,8 +179,9 @@ export default class SafeFilenameLinter extends Plugin {
 		// If there are changes to be made to the filename
 		if (newFilename != oldFilename) {
 			// Construct the new path
+			const path = file.parent ? file.parent.path : '/';
 			const newFilepath = normalizePath(
-				`${file.parent.path}/${newFilename}.${file.extension}`,
+				`${path}/${newFilename}.${file.extension}`,
 			);
 
 			// If a file already exists with this path, filemanager.renameFile() will throw an error. There might be other reasons it throws errors, but not as far as we can tell from the documentation.

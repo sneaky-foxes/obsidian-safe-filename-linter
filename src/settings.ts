@@ -1,4 +1,5 @@
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, DropdownComponent, PluginSettingTab, Setting } from 'obsidian';
+import type SafeFilenameLinter from './main';
 
 export default class SafeFilenameLinterSettingTab extends PluginSettingTab {
 	plugin: SafeFilenameLinter;
