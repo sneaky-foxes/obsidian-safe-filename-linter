@@ -81,14 +81,18 @@ For updates to the Obsidian API run `npm update` in the command line under your 
 
 ### Making new releases
 
-- Update the `manifest.json` with the new version number, such as `1.0.1`, and the minimum Obsidian version required for the latest release.
-- Update the `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create a new GitHub release using the new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places: in the root path of the repository and also in the release.
-- Publish the release.
+1. Update the manifest, version, and package: `npm release [major|minor|patch]`
+2. Delete the tag that is auto-created: `git tag -d [tag]`
+3. Commit the change: `git commit -m [version number without v]`. Example: `git commit -m 1.1.0`
+4. Push the change and create a pull request
+5. Once the pull request has been merged, pull the new `main` branch: `git checkout main && git pull origin main`
+6. Tag the release commit: `git tag -a [version number without v] -m "[version number without v]"`. Example: `git tag -a 1.1.0 -m "1.1.0"`
+7. Push the tag to trigger release github action workflow: `git push --tags`
+8. Go to https://github.com/sneaky-foxes/obsidian-safe-filename-linter/releases and publish the release
 
-> Simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+NB Because we are using Github's rebase merge strategy, we need to work around the fact that Github is not fast-forwarding commits and is instead creating new commits for the rebase. When we allowed the tag to be in the pull release, the tag would be on a headless commit. This approach ensures that the tags are on `main`.
+
+See for more release details: https://github.com/obsidianmd/obsidian-sample-plugin/releases
 
 ### Adding the plugin to the community plugin list
 
