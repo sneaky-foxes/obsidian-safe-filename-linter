@@ -83,12 +83,11 @@ For updates to the Obsidian API run `npm update` in the command line under your 
 
 1. Update the manifest, version, and package: `npm version [major|minor|patch]`
 2. Delete the tag that is auto-created: `git tag -d [tag]`
-3. Commit the change: `git commit -m [version number without v]`. Example: `git commit -m 1.1.0`
-4. Push the change and create a pull request
-5. Once the pull request has been merged, pull the new `main` branch: `git checkout main && git pull origin main`
-6. Tag the release commit: `git tag -a [version number without v] -m "[version number without v]"`. Example: `git tag -a 1.1.0 -m "1.1.0"`
-7. Push the tag to trigger release github action workflow: `git push --tags`
-8. Go to https://github.com/sneaky-foxes/obsidian-safe-filename-linter/releases and publish the release
+3. Push the change and create a pull request
+4. Once the pull request has been merged, pull the new `main` branch: `git checkout main && git pull origin main`
+5. Tag the release commit: `git tag -a [version number without v] -m "[version number without v]"`. Example: `git tag -a 1.1.0 -m "1.1.0"`
+6. Push the tag to trigger release github action workflow: `git push --tags`
+7. Go to https://github.com/sneaky-foxes/obsidian-safe-filename-linter/releases and publish the release
 
 NB Because we are using Github's rebase merge strategy, we need to work around the fact that Github is not fast-forwarding commits and is instead creating new commits for the rebase. When we allowed the tag to be in the pull release, the tag would be on a headless commit. This approach ensures that the tags are on `main`.
 
