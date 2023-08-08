@@ -81,7 +81,7 @@ For updates to the Obsidian API run `npm update` in the command line under your 
 
 ### Making new releases
 
-1. Update the manifest, version, and package: `npm release [major|minor|patch]`
+1. Update the manifest, version, and package: `npm version [major|minor|patch]`
 2. Delete the tag that is auto-created: `git tag -d [tag]`
 3. Commit the change: `git commit -m [version number without v]`. Example: `git commit -m 1.1.0`
 4. Push the change and create a pull request
