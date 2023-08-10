@@ -54,9 +54,8 @@ When developing, ensure you are running `npm run dev` to keep the project buildi
 
 We welcome issues and pull requests for any characters that cause issues for Obsidian or any platform it runs on. We also welcome any additional replacement characters. This plugin has no desire to handle linting characters beyond functional filename use cases.
 
-If submitting a PR, please run eslint and prettier on your code changes. Please thoroughly test on at least one platform, and include testing instructions in the PR. Add a review request from @sneaky-foxes.
+See [CONTRIBUTING](./CONTRIBUTING.md) for details on how to submit code.
 
-NB: We intentially did not include `\` and `/` due to difficulties in testing these globally-forbidden filename characters, but would welcome a contribution with testing protocol for them.
 
 ### Testing
 
@@ -95,8 +94,8 @@ See for more release details: https://github.com/obsidianmd/obsidian-sample-plug
 
 ### Adding the plugin to the community plugin list
 
-- [ ] Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- [ ] Publish an initial version.
+- [x] Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
+- [x] Publish an initial version.
 - [x] Make sure you have a `README.md` file in the root of your repo.
 - [ ] Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
 
