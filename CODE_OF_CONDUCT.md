@@ -30,7 +30,7 @@ Examples of unacceptable behavior include:
 * The use of sexualized language or imagery, and sexual attention or
   advances of any kind
 * Trolling, insulting or derogatory comments, and personal or political attacks
-* Spamming or excessive off-topic conversation.
+* Spamming or excessive off-topic conversation
 * Public or private harassment
 * Publishing others' private information, such as a physical or email
   address, without their explicit permission
@@ -87,7 +87,7 @@ behavior was inappropriate. A public apology may be requested.
 of actions.
 
 **Consequence**: A warning with consequences for continued behavior. A public
-apology or private acknowledgement of harms caused may be requested. Additionl
+apology or private acknowledgement of harms caused may be requested. Additional
 violations of these terms may lead to a temporary or permanent ban.
 
 ### Temporary Ban
