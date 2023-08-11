@@ -1,6 +1,6 @@
 ## Welcome
 
-Thank you for considering contributing! All contributors should abide by the [Code of Conduct](./CODE_OF_CONDUCT.md)
+Thank you for considering contributing! All contributors should abide by the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Code Quality
 
@@ -20,10 +20,10 @@ We will do our best to respond in a timely manner to all contributions, with a g
   - New characters that cause issues for Obsidian or any platform it runs on.
   - New additional replacement characters.
 
-###  Examples Out-of-Scope Contributions
+###  Examples of Out-of-Scope Contributions
   - Emojis
-  - non-ASCII
-  - Characters beyond functional filename use cases.
+  - non-ASCII characters
+  - Characters beyond functional filename use cases
 
 ### `/` & `\`
 
