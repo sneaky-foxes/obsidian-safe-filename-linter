@@ -1,5 +1,13 @@
 # Obsidian Filename Linter Plugin
 
+## Description
+
+Lint filenames for invalid or troublesome characters.
+
+Useful for Obsidian users who create notes via external means or sync their notes across various platforms.
+
+Handles characters that cause issues for Obsidian itself along with characters that are invalid in Android filenames.
+
 ## Using the plugin
 
 ### Manual invocation
@@ -21,16 +29,19 @@ We are grateful to the developers of Obsidian for the [Obisidan Sample Plugin](o
 
 ## Installing the plugin
 
-### Manual install
+### Community plugin directory
+
+1. Search for `Safe Filename Linter` in the directory
+2. Enable this project from the Community Plugins setting section
+3. Set up your preferred character replacements in the Safe Filename Linter Community Plugins section
+
+### Manually Install
 
 1. On the command line, navigate to your vault's `.obsidian/plugins` directory and run:
    `git clone https://github.com/sneaky-foxes/obsidian-safe-filename-linter`
+   - Alternatively, download the latest release and place the `main.js` and `manifest.js` in the directory in `obsidian-safe-filename-linter`
 2. In your Obsidian vault, enable this project from the Community Plugins setting section
 3. Set up your preferred character replacements in the Safe Filename Linter Community Plugins section
-
-### Community plugin directory
-
-Not yet available.
 
 ## Developing the plugin
 
@@ -91,13 +102,6 @@ For updates to the Obsidian API run `npm update` in the command line under your 
 NB Because we are using Github's rebase merge strategy, we need to work around the fact that Github is not fast-forwarding commits and is instead creating new commits for the rebase. When we allowed the tag to be in the pull release, the tag would be on a headless commit. This approach ensures that the tags are on `main`.
 
 See for more release details: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-
-### Adding the plugin to the community plugin list
-
-- [x] Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- [x] Publish an initial version.
-- [x] Make sure you have a `README.md` file in the root of your repo.
-- [ ] Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
 
 ### Obsidian API documentation
 
