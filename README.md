@@ -2,7 +2,7 @@
 
 ## Description
 
-Lint filenames for invalid or troublesome characters.
+Lint filenames for invalid or troublesome characters, such as pipes, colons, and brackets.
 
 Useful for Obsidian users who create notes via external means or sync their notes across various platforms.
 
@@ -39,7 +39,7 @@ We are grateful to the developers of Obsidian for the [Obisidan Sample Plugin](o
 
 1. On the command line, navigate to your vault's `.obsidian/plugins` directory and run:
    `git clone https://github.com/sneaky-foxes/obsidian-safe-filename-linter`
-   - Alternatively, download the latest release and place the `main.js` and `manifest.js` in the directory in `obsidian-safe-filename-linter`
+   - Alternatively, download the latest release and place the `main.js` and `manifest.json` in the directory in `obsidian-safe-filename-linter`
 2. In your Obsidian vault, enable this project from the Community Plugins setting section
 3. Set up your preferred character replacements in the Safe Filename Linter Community Plugins section
 
